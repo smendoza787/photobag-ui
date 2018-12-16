@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setAlbums } from './store/actions/albumActions';
+import { NavBar } from './components/NavBar';
 import Main from './components/Main';
 import Home from './components/Home';
-import Album from './components/Album';
+import { AlbumContainer } from './components/Album';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import './App.css';
 
-class App extends Component {
-  constructor() {
-    super();
+const propTypes = {
+  albums: PropTypes.array.isRequired,
+  setAlbums: PropTypes.func.isRequired
+};
 
-    this.state = {
-      albums: []
-    };
-  }
+class App extends Component {
 
   componentDidMount() {
-    let albums;
+    const { setAlbums } = this.props;
 
     fetch('https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums')
       .then(res => res.json())
-      .then(data => this.setState({ albums: data }));
+      .then(data => setAlbums(data));
   }
 
   render() {
-    const { albums } = this.state;
-    
+    const { albums } = this.props;
 
     return (
       <div className="app">
@@ -36,7 +36,7 @@ class App extends Component {
             <Main>
               <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route path="/album/:albumId" component={Album} />
+                  <Route path="/album/:albumId" component={AlbumContainer} />
               </Switch>
             </Main>
           </>
@@ -46,4 +46,14 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = propTypes;
+
+const mapStateToProps = state => ({
+  albums: state.albums
+});
+
+const mapDispatchToProps = dispatch => ({
+  setAlbums: (albums) => dispatch(setAlbums(albums))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

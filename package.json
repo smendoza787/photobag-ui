@@ -8,8 +8,12 @@
     "dotenv": "^6.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-dropzone": "^8.0.1",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "uuid4": "^1.1.4"
   },
   "scripts": {
@@ -26,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "redux-devtools": "^3.4.2"
+  }
 }
