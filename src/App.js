@@ -8,12 +8,31 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      albums: []
+    };
+  }
+
+  componentDidMount() {
+    let albums;
+
+    fetch('https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums')
+      .then(res => res.json())
+      .then(data => this.setState({ albums: data }));
+  }
+
   render() {
+    const { albums } = this.state;
+    
+
     return (
       <div className="app">
         <Router>
           <>
-            <NavBar />
+            <NavBar albums={albums} />
             <Main>
               <Switch>
                   <Route exact path="/" component={Home} />
