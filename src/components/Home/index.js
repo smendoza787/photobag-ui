@@ -12,11 +12,13 @@ class Home extends React.Component {
 
     this.state = {
       bucketContents: [],
-      uploadFile: {}
+      uploadFile: {},
+      uploadLoading: false
     };
 
     this.onUploadChange = this.onUploadChange.bind(this);
     this.onUploadSubmit = this.onUploadSubmit.bind(this);
+    this.renderLoading = this.renderLoading.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,8 @@ class Home extends React.Component {
 
   onUploadSubmit(event) {
     event.preventDefault();
+
+    this.setState({ uploadLoading: true });
     
     this.uploadFile(this.state.uploadFile, 'jpg');
   }
@@ -71,9 +75,18 @@ class Home extends React.Component {
     return s3.upload(params).promise()
       .then(res => {
         const content = { Key: res.key };
-        this.setState({ bucketContents: [...this.state.bucketContents, content] });
+        this.setState({
+          bucketContents: [...this.state.bucketContents, content],
+          uploadLoading: false
+        });
       });
   };
+
+  renderLoading() {
+    if (this.state.uploadLoading) {
+      return <h1>Uploading...</h1>;
+    }
+  }
 
   render() {
     console.log(this.state);
@@ -86,6 +99,7 @@ class Home extends React.Component {
           <form onSubmit={this.onUploadSubmit}>
             <input type="file" accept="image/png, image/jpeg" onChange={this.onUploadChange} />
             <input type="submit" />
+            { this.renderLoading() }
           </form>
         </div>
       </div>

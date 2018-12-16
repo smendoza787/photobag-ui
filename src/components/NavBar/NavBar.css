@@ -4,3 +4,7 @@
   height: 100%;
   padding: 50px;
 }
+
+.nav-header:hover {
+  cursor: pointer;
+}

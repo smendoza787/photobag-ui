@@ -1,5 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const Header = ({ title }) => <h1>{title}</h1>;
+class Header extends React.Component {
 
-export default Header;
+  constructor(props) {
+    super(props);
+
+    this.navigateHome = this.navigateHome.bind(this);
+  }
+  
+  navigateHome() {
+    this.props.history.push('/');
+  }
+  
+  render() {
+    return (
+      <h1 className="nav-header" onClick={this.navigateHome}>{ this.props.title }</h1>
+    );
+  }
+}
+
+export default withRouter(Header);
