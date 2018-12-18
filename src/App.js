@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setAlbums } from './store/actions/albumActions';
+import { setAlbums as _setAlbums, setSelectedAlbum as _setSelectedAlbum } from './store/actions/albumActions';
 import { NavBar } from './components/NavBar';
 import Main from './components/Main';
 import Home from './components/Home';
@@ -26,13 +26,11 @@ class App extends Component {
   }
 
   render() {
-    const { albums } = this.props;
-
     return (
       <div className="app">
         <Router>
           <>
-            <NavBar albums={albums} />
+            <NavBar { ...this.props } />
             <Main>
               <Switch>
                   <Route exact path="/" component={Home} />
@@ -49,11 +47,12 @@ class App extends Component {
 App.propTypes = propTypes;
 
 const mapStateToProps = state => ({
-  albums: state.albums
+  albums: state.photobook.albums
 });
 
 const mapDispatchToProps = dispatch => ({
-  setAlbums: (albums) => dispatch(setAlbums(albums))
+  setAlbums: (albums) => dispatch(_setAlbums(albums)),
+  setSelectedAlbum: (album) => dispatch(_setSelectedAlbum(album))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -9,7 +9,7 @@ class AlbumContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  album: state.albums.filter(album => album.albumName === 'Anotha Album')[0]
+  album: state.photobook.selectedAlbum
 });
 
 export default connect(mapStateToProps)(AlbumContainer);
