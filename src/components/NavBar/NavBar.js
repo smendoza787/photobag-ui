@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Header';
-import { Link } from "react-router-dom";
 
 import './NavBar.css';
 
-const NavBar = ({ albums }) => (
-  <div className="navbar">
-    <Header title={'Austin Mendoza'} />
-    {albums.map((el, i) => {
-      return <Link to={`/album/${el.albumName.toLowerCase().replace(/\s/g, "-")}`} key={i} ><h4>{el.albumName}</h4></Link>
-    })}
-  </div>
-);
+const NavBar = ({ albums }) => {
+  return (
+    <div className="navbar">
+      <Header title={'Austin Mendoza'} />
+      {albums.map((el, i) => {
+        return <Link to={`/album/${el.albumId}`} key={i}><h4>{el.albumName}</h4></Link>
+      })}
+    </div>
+  );
+}
 
 export default NavBar;

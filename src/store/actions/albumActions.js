@@ -1,4 +1,4 @@
-import { SET_ALBUMS, SET_SELECTED_ALBUM } from '../constants/albumConstants';
+import { SET_ALBUMS, SELECT_ALBUM } from '../constants/albumConstants';
 
 export const setAlbums = albums => dispatch => {
   dispatch({
@@ -7,9 +7,9 @@ export const setAlbums = albums => dispatch => {
   });
 };
 
-export const setSelectedAlbum = album => dispatch => {
+export const selectAlbum = album => dispatch => {
   dispatch({
-    type: SET_SELECTED_ALBUM,
+    type: SELECT_ALBUM,
     payload: album
   });
 };

@@ -5,9 +5,9 @@ const propTypes = {
   match: PropTypes.object.isRequired
 };
 
-const Album = ({ match }) => (
+const Album = ({ album }) => (
   <div className="album">
-    <h1>Album: { match.params.albumId }</h1>
+    <h1>Album: { album && album.albumName }</h1>
   </div>
 );
 

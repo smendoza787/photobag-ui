@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setAlbums as _setAlbums, setSelectedAlbum as _setSelectedAlbum } from './store/actions/albumActions';
+import { setAlbums as _setAlbums } from './store/actions/albumActions';
 import { NavBar } from './components/NavBar';
 import Main from './components/Main';
 import Home from './components/Home';
@@ -51,8 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setAlbums: (albums) => dispatch(_setAlbums(albums)),
-  setSelectedAlbum: (album) => dispatch(_setSelectedAlbum(album))
+  setAlbums: (albums) => dispatch(_setAlbums(albums))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,2 +1,2 @@
 export const SET_ALBUMS = 'SET_ALBUMS';
-export const SET_SELECTED_ALBUM = 'SET_SELECTED_ALBUM';
+export const SELECT_ALBUM = 'SELECT_ALBUM';
