@@ -49,6 +49,8 @@ class ImageUpload extends React.Component {
     const uploadFileIsEmpty = uploadFiles.length === 0;
         
     if (!uploadFileIsEmpty) {
+      this.setState({ isUploading: true });
+
       const params = {
         ACL: 'public-read',
         Body: this.state.uploadFiles[0],
