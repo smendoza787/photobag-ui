@@ -6,19 +6,16 @@ import { selectAlbum as _selectAlbum } from '../../store/actions/albumActions';
 class AlbumContainer extends React.Component {
 
   componentDidMount() {
-    this.selectAlbum();
+    this.handleSelectAlbum();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const prevAlbum = prevProps.album && prevProps.album.albumId;
-    const currAlbum = this.props.albumId;
-
-    if (prevAlbum !== currAlbum) {
-      this.selectAlbum();
+    if (this.props !== prevProps) {
+      this.handleSelectAlbum();
     }
   }
 
-  selectAlbum() {
+  handleSelectAlbum() {
     const { albums, match, selectAlbum } = this.props;
     const { albumId } = match.params;
     const selectedAlbum = albums.find(album => album.albumId === albumId);
@@ -26,7 +23,7 @@ class AlbumContainer extends React.Component {
     selectAlbum(selectedAlbum);
   }
 
-  render() {
+  render() {    
     return <Album { ...this.props } />;
   }
 }
