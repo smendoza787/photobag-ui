@@ -1,0 +1,25 @@
+div[class^="dropzone"] {
+  height: 150px;
+  border: 3px dashed #66a5c2;
+  border-radius: 10px;
+}
+
+.dropzone {
+  
+}
+
+.dropzone-hover {
+  background-color: #eeeeee;
+}
+
+.dropzone-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-preview {
+  border: 3px solid #c1c1c1;
+  border-radius: 10px;
+  max-height: 95%;
+}

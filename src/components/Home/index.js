@@ -1,6 +1,6 @@
 import React from 'react';
 import s3 from '../../aws/s3bucket';
-import ImageUpload from '../ImageUpload';
+import { ImageUpload } from '../ImageUpload';
 
 import './Home.css';
 
