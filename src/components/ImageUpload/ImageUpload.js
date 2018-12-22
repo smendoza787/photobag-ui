@@ -24,7 +24,7 @@ class ImageUpload extends React.Component {
 
   renderLoading() {
     if (this.state.isUploading) {
-      return <Spinner name="circle" color="green" />;
+      return <Spinner name="three-bounce" color="red" />;
     }
   }
 

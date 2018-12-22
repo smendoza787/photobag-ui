@@ -9,8 +9,30 @@
 }
 
 .del-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
   cursor: pointer;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 500px;
+  box-shadow: 1px 1px 5px #383838;
+  font-weight: bold;
+}
+
+.del-btn:hover {
+  background-color: white;
+  color: red;
+}
+
+.del-btn:active {
+  background-color: #940000;
+  color: white;
 }
