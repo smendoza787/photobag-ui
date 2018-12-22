@@ -11,7 +11,8 @@ class AlbumContainer extends React.Component {
     super(props);
 
     this.state = {
-      photos: []
+      photos: [],
+      loadingAlbum: false
     }
 
     this.addImageToPhotos = this.addImageToPhotos.bind(this);
@@ -24,7 +25,7 @@ class AlbumContainer extends React.Component {
   }
 
   setPhotos() {
-    this.setState({ photos: [] });
+    this.setState({ photos: [], loadingAlbum: true });
     const albumId = this.props.currAlbum.albumId;
 
     const params = {
@@ -36,7 +37,7 @@ class AlbumContainer extends React.Component {
       if (err) {
         console.log(err, err.stack);
       } else {
-        this.setState({ photos: data.Contents });
+        this.setState({ photos: data.Contents, loadingAlbum: false });
       }
     })
   }
@@ -60,9 +61,10 @@ class AlbumContainer extends React.Component {
 
   renderPhotos(bucketContents) {
     
-    if (bucketContents.length === 0) {
+    if (this.state.loadingAlbum) {
       return <h2>Loading bucket contents...</h2>
     }
+
     return bucketContents.map((content, i) => {
       const url = s3bucket.getSignedUrl('getObject', {
         Bucket: BUCKET_NAME,
