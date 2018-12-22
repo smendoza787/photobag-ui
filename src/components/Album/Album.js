@@ -3,6 +3,8 @@ import { pure } from 'recompose';
 import get from 'lodash.get';
 import ImageUpload from '../ImageUpload/ImageUpload';
 
+import './Album.css';
+
 const Album = ({ currAlbum, handleUpload, photos }) => (
   <div className="album">
     <h1>{ get(currAlbum, 'albumName') }</h1>
