@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { setAlbums as _setAlbums } from './store/actions/albumActions';
+import { albumsSelector } from './store/selectors';
+
 import { NavBar } from './components/NavBar';
 import Main from './components/Main';
 import Home from './components/Home';
@@ -47,7 +50,7 @@ class App extends Component {
 App.propTypes = propTypes;
 
 const mapStateToProps = state => ({
-  albums: state.photobook.albums
+  albums: albumsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({

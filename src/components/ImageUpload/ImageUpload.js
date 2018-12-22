@@ -32,7 +32,6 @@ class ImageUpload extends React.Component {
   onDrop(accFiles, rejfiles) {
     this.setState({ uploadFiles: [accFiles[0]] });
 
-    const { uploadFiles } = this.state;
     const reader = new FileReader();
 
     reader.onloadend = event => {      
@@ -91,7 +90,7 @@ class ImageUpload extends React.Component {
   renderActiveDropZone() {
     return (
       <div className="dropzone-active">
-        { this.state.uploadFiles.map((file, i) => <img className="upload-preview" src={this.state.filePreviews} key={i} />) }
+        { this.state.uploadFiles.map((file, i) => <img className="upload-preview" src={this.state.filePreviews} key={i} alt="" />) }
       </div>
     );
   }

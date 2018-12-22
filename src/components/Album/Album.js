@@ -1,17 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { pure } from 'recompose';
-
-const propTypes = {
-  match: PropTypes.object.isRequired
-};
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 const Album = ({ album }) => (
   <div className="album">
     <h1>Album: { album && album.albumName }</h1>
+    <ImageUpload />
   </div>
 );
-
-Album.propTypes = propTypes;
 
 export default pure(Album);

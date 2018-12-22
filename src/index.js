@@ -5,9 +5,6 @@ import configureStore from './store/store';
 import './index.css';
 import App from './App';
 
-import whyDidYouUpdate from 'why-did-you-update';
-whyDidYouUpdate(React);
-
 // dot-env config
 require('dotenv').config()
 

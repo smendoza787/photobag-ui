@@ -1,27 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Album from './Album';
+import { albumsSelector, currentAlbumSelector } from '../../store/selectors';
 
 class AlbumContainer extends React.Component {
 
-  getCurrentAlbum() {
-    const { albums, match } = this.props;
-    const { albumId } = match.params;
-    return albums.find(album => album.albumId === albumId);
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      photos: []
+    }
   }
 
   render() {
-    const currentAlbum = this.getCurrentAlbum();
+    const { currAlbum } = this.props;    
 
-    console.log('render');
-    
-
-    return <Album album={currentAlbum} />;
+    return <Album album={currAlbum} />;
   }
 }
 
-const mapStateToProps = state => ({
-  albums: state.photobook.albums,
+const mapStateToProps = (state, props) => ({
+  albums: albumsSelector(state),
+  currAlbum: currentAlbumSelector(props.match.params.albumId)(state)
 });
 
 export default connect(mapStateToProps)(AlbumContainer);
