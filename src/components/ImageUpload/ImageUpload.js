@@ -1,11 +1,9 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import uuid4 from 'uuid4';
-import s3 from '../../aws/s3bucket';
+import s3, { BUCKET_NAME } from '../../aws/s3bucket';
 
 import './ImageUpload.css';
-
-const Bucket = 'photobaggy';
 
 class ImageUpload extends React.Component {
 
@@ -45,6 +43,7 @@ class ImageUpload extends React.Component {
 
   uploadFile() {
     const { uploadFiles } = this.state;
+    const albumId = this.props.currAlbum.albumId;
     const uploadFileIsEmpty = uploadFiles.length === 0;
         
     if (!uploadFileIsEmpty) {
@@ -53,13 +52,13 @@ class ImageUpload extends React.Component {
       const params = {
         ACL: 'public-read',
         Body: this.state.uploadFiles[0],
-        Bucket,
+        Bucket: BUCKET_NAME,
         ContentType: 'image/jpg',
-        Key: `${uuid4()}.jpg`
+        Key: `${albumId}/${uuid4()}.jpg`
       };
   
       return s3.upload(params).promise()
-        .then(s3Response => {          
+        .then(s3Response => {
           this.props.handleUpload(s3Response);
 
           this.setState({

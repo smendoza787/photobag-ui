@@ -9,6 +9,6 @@ AWS.config.update({
 
 AWS.config.setPromisesDependency(bluebird);
 
-const s3 = new AWS.S3();
+export const BUCKET_NAME = 'photobaggy'
 
-export default s3;
+export default new AWS.S3();
