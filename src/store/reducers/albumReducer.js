@@ -1,4 +1,4 @@
-import { SET_ALBUMS, SELECT_ALBUM } from "../constants/albumConstants";
+import { SET_ALBUMS } from "../constants/albumConstants";
 
 const initialState = {
   selectedAlbum: {},
@@ -11,12 +11,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         albums: action.payload
-      };
-    case SELECT_ALBUM:
-      return {
-        ...state,
-        selectedAlbum: action.payload
-      };
+      };  
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header';
+import { pure } from 'recompose';
 
 import './NavBar.css';
 
@@ -15,4 +16,4 @@ const NavBar = ({ albums }) => {
   );
 }
 
-export default NavBar;
+export default pure(NavBar);

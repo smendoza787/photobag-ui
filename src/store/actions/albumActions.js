@@ -6,10 +6,3 @@ export const setAlbums = albums => dispatch => {
     payload: albums
   });
 };
-
-export const selectAlbum = album => dispatch => {
-  dispatch({
-    type: SELECT_ALBUM,
-    payload: album
-  });
-};

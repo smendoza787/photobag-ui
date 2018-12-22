@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { pure } from 'recompose';
 
 const propTypes = {
   match: PropTypes.object.isRequired
@@ -13,4 +14,4 @@ const Album = ({ album }) => (
 
 Album.propTypes = propTypes;
 
-export default Album;
+export default pure(Album);
