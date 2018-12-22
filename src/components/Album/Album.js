@@ -5,7 +5,7 @@ import ImageUpload from '../ImageUpload/ImageUpload';
 
 const Album = ({ currAlbum, handleUpload, photos }) => (
   <div className="album">
-    <h1>Album: { get(currAlbum, 'albumName') }</h1>
+    <h1>{ get(currAlbum, 'albumName') }</h1>
     <div className="album-photos">
       { photos }
     </div>

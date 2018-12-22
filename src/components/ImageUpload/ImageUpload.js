@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import Spinner from 'react-spinkit';
 import uuid4 from 'uuid4';
 import s3, { BUCKET_NAME } from '../../aws/s3bucket';
 
@@ -23,7 +24,7 @@ class ImageUpload extends React.Component {
 
   renderLoading() {
     if (this.state.isUploading) {
-      return <h1>Uploading...</h1>;
+      return <Spinner name="circle" color="green" />;
     }
   }
 
@@ -96,8 +97,7 @@ class ImageUpload extends React.Component {
 
   render() {    
     return (
-      <>
-        <h1>Upload</h1>
+      <div className="image-upload">
         { this.renderLoading() }
         <Dropzone onDrop={this.onDrop} onDragEnter={this.onDragEnter}>
           {({getRootProps, getInputProps, isDragActive}) => {
@@ -119,7 +119,7 @@ class ImageUpload extends React.Component {
         <button onClick={this.uploadFile}>
           Upload
         </button>
-      </>
+      </div>
     );
   }
 }

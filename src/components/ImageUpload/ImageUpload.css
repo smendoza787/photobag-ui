@@ -23,3 +23,7 @@ div[class^="dropzone"] {
   border-radius: 10px;
   max-height: 95%;
 }
+
+.image-upload {
+  max-width: 300px;
+}

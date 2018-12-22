@@ -1,10 +1,9 @@
 .image-wrapper {
-  float: left;
   max-width: 250px;
   position: relative;
 }
 
-img {
+.image-wrapper img {
   display: block;
   width: 100%;
 }

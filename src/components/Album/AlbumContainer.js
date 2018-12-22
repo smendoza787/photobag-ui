@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
+
 import Album from './Album';
 import { albumsSelector, currentAlbumSelector } from '../../store/selectors';
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
@@ -62,7 +64,7 @@ class AlbumContainer extends React.Component {
   renderPhotos(bucketContents) {
     
     if (this.state.loadingAlbum) {
-      return <h2>Loading bucket contents...</h2>
+      return <Spinner name='double-bounce' />;
     }
 
     return bucketContents.map((content, i) => {
