@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Album from './Album';
 import { albumsSelector, currentAlbumSelector } from '../../store/selectors';
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
+import Image from './Image';
 
 class AlbumContainer extends React.Component {
 
@@ -40,6 +41,23 @@ class AlbumContainer extends React.Component {
     })
   }
 
+  deletePhoto(s3key) {
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: s3key
+    };    
+
+    s3bucket.deleteObject(params, (err, data) => {
+      if (err) {
+        console.log(err, err.stack);
+      } else {
+        const newPhotos = this.state.photos.filter(photo => photo.Key !== s3key);
+
+        this.setState({ photos: newPhotos });
+      }
+    });
+  }
+
   renderPhotos(bucketContents) {
     
     if (bucketContents.length === 0) {
@@ -52,7 +70,7 @@ class AlbumContainer extends React.Component {
         Expires: 60 * 5
       });
 
-      return <img key={i} src={url} alt="" />
+      return <Image url={ url } handleDeletePhoto={ () => this.deletePhoto(content.Key) } />;
     });
   }
 

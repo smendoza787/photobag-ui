@@ -1,0 +1,17 @@
+.image-wrapper {
+  float: left;
+  max-width: 250px;
+  position: relative;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.del-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
