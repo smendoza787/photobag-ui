@@ -74,7 +74,7 @@ class AlbumContainer extends React.Component {
         Expires: 60 * 5
       });
 
-      return <Image url={ url } handleDeletePhoto={ () => this.deletePhoto(content.Key) } />;
+      return <Image url={ url } handleDeletePhoto={ () => this.deletePhoto(content.Key) } key={ i } />;
     });
   }
 
@@ -82,9 +82,7 @@ class AlbumContainer extends React.Component {
     this.setState({ photos: [...this.state.photos, s3Response] });
   }
 
-  render() {
-    console.log();
-    
+  render() {    
     return (
       <>
         <Album photos={ this.renderPhotos(this.state.photos) } handleUpload={ this.addImageToPhotos } { ...this.props } />

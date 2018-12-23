@@ -21,7 +21,7 @@ class ModalContainer extends React.Component {
           onRequestClose={ toggleCreateNewAlbumModal }
           style={ createNewAlbumStyle }
         >
-          <CreateNewAlbumModal />
+          <CreateNewAlbumModal handleCloseModal={ toggleCreateNewAlbumModal } />
         </ReactModal>
       </>
     );

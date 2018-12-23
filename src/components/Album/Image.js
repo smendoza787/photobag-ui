@@ -26,7 +26,7 @@ class Image extends React.Component {
   renderDelBtn(isHovered) {
     if (isHovered) {
       return (
-        <div className="del-btn" onClick={ this.props.handleDeletePhoto }>
+        <div className="red-x-btn" onClick={ this.props.handleDeletePhoto }>
           X
         </div>
       );

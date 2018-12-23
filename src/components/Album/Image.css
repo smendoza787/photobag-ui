@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.del-btn {
+.red-x-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,13 +27,13 @@
   font-weight: bold;
 }
 
-.del-btn:hover {
+.red-x-btn:hover {
   background-color: #ffffff;
   border: 2px solid #ce1c1c;
   color: #ce1c1c;
 }
 
-.del-btn:active {
+.red-x-btn:active {
   background-color: #940000;
   color: white;
 }
