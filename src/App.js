@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from './store/actions/modalActions';
-import { setAlbums as _setAlbums } from './store/actions/albumActions';
+import { fetchAlbums as _fetchAlbums } from './store/actions/albumActions';
 import { albumsSelector } from './store/selectors/albumSelectors';
 
 import { NavBar } from './components/NavBar';
@@ -17,16 +17,12 @@ import ModalContainer from './components/Modal/ModalContainer';
 
 const propTypes = {
   albums: PropTypes.array.isRequired,
-  setAlbums: PropTypes.func.isRequired
+  fetchAlbums: PropTypes.func.isRequired
 };
 
 class App extends Component {
   componentDidMount() {
-    const { setAlbums } = this.props;
-
-    fetch('https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums')
-      .then(res => res.json())
-      .then(data => setAlbums(data));
+    this.props.fetchAlbums();
   }
 
   render() {
@@ -57,7 +53,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setAlbums: (albums) => dispatch(_setAlbums(albums)),
+  fetchAlbums: () => dispatch(_fetchAlbums()),
   toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal())
 });
 
