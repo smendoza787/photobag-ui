@@ -1,5 +1,4 @@
 import React from 'react';
-import { pure } from 'recompose';
 import get from 'lodash.get';
 import ImageUpload from '../ImageUpload/ImageUpload';
 

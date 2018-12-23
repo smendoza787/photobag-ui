@@ -11,7 +11,7 @@
 }
 
 .btn-navbar {
-  background-color: #2bc251;
+  background-color: #b32e70;
   color: #ffffff;
   position: absolute;
   bottom: 25px;
@@ -20,10 +20,11 @@
 
 .btn-navbar:hover {
   background-color: #ffffff;
-  color: #2bc251;
+  color: #b32e70;
 }
 
 .btn-navbar:active {
-  background-color: #c4c4c4;
+  background-color: #757575;
   color: #ffffff;
+  box-shadow: 0 0 0 black;
 }

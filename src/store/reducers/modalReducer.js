@@ -1,17 +1,16 @@
-import { SET_ALBUMS } from "../constants/albumConstants";
+import { TOGGLE_MODAL } from '../constants/modalConstants';
 
 const initialState = {
-  selectedAlbum: {},
-  albums: []
+  isOpen: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_ALBUMS:
+    case TOGGLE_MODAL:
       return {
         ...state,
-        albums: action.payload
-      };  
+        isOpen: !state.isOpen
+      };
     default:
       return state;
   }
