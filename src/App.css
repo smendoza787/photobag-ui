@@ -14,5 +14,5 @@ div[class^="btn"] {
   justify-content: center;
   border-radius: 500px;
   height: 35px;
-  box-shadow: 2px 2px 5px #696969;
+  box-shadow: 0 2px 5px #696969;
 }

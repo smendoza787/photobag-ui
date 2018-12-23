@@ -1,7 +1,6 @@
 import { SET_ALBUMS } from "../constants/albumConstants";
 
 const initialState = {
-  selectedAlbum: {},
   albums: []
 };
 

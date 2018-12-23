@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import { createNewAlbumModalSelector } from '../../store/selectors/modalSelectors';
 import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from '../../store/actions/modalActions';
+import CreateNewAlbumModal, { style as createNewAlbumStyle } from './CreateNewAlbumModal';
 
 ReactModal.setAppElement('#root');
 
@@ -18,8 +19,9 @@ class ModalContainer extends React.Component {
         <ReactModal
           isOpen={ createNewAlbumModal.isOpen }
           onRequestClose={ toggleCreateNewAlbumModal }
+          style={ createNewAlbumStyle }
         >
-          <h1>Create New Album</h1>
+          <CreateNewAlbumModal />
         </ReactModal>
       </>
     );
