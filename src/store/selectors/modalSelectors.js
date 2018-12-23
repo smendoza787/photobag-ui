@@ -1,1 +1,1 @@
-export const modalSelector = state => state.modal;
+export const createNewAlbumModalSelector = state => state.modal.createNewAlbum;

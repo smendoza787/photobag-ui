@@ -1,7 +1,5 @@
-import { TOGGLE_MODAL } from "../constants/modalConstants";
+import { TOGGLE_CREATE_NEW_ALBUM_MODAL } from "../constants/modalConstants";
 
-export const toggleModal = () => dispatch => {
-  dispatch({
-    type: TOGGLE_MODAL
-  });
-};
+export const toggleCreateNewAlbumModal = () => ({
+  type: TOGGLE_CREATE_NEW_ALBUM_MODAL
+});

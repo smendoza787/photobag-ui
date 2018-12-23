@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
 import Album from './Album';
-import { albumsSelector, currentAlbumSelector } from '../../store/selectors';
+import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albumSelectors';
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
 import Image from './Image';
 

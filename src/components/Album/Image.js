@@ -1,5 +1,4 @@
 import React from 'react';
-import s3bucket from '../../aws/s3bucket';
 
 import './Image.css';
 
