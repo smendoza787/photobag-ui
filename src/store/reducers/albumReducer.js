@@ -1,4 +1,4 @@
-import { SET_ALBUMS } from "../constants/albumConstants";
+import { SET_ALBUMS, ADD_NEW_ALBUM } from "../constants/albumConstants";
 
 const initialState = {
   albums: []
@@ -10,7 +10,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         albums: action.payload
-      };  
+      };
+    case ADD_NEW_ALBUM:
+      return {
+        ...state,
+        albums: [...state.albums, action.payload]
+      };
     default:
       return state;
   }

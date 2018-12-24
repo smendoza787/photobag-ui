@@ -24,7 +24,7 @@
   color: #30be56;
   width: 150px;
   border-radius: 3px;
-  margin: 0 10px;
+  margin: 0 25px;
 }
 
 .primary-btn:hover {
@@ -40,7 +40,7 @@
   color: #be495c;
   width: 150px;
   border-radius: 3px;
-  margin: 0 10px;
+  margin: 0 25px;
 }
 
 .default-btn:hover {

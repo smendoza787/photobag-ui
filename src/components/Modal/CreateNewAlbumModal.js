@@ -16,17 +16,44 @@ class CreateNewAlbumModal extends React.Component {
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleCreateAlbum = this.handleCreateAlbum.bind(this);
   }
 
   handleOnChange(e) {
     this.setState({ newAlbumValue: e.target.value });
   }
 
-  handleCreateClick() {
+  handleCreateAlbum() {
+    if (this.state.newAlbumValue.length > 0) {
+      const data = {
+        albumName: this.state.newAlbumValue,
+	      photoList: []
+      };
 
+      fetch('https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+        .then(data => {
+          const {
+            addNewAlbum,
+            handleCloseModal,
+            history
+          } = this.props;
+
+          addNewAlbum(data);
+          handleCloseModal();
+          history.push(data.albumId);          
+        })
+        .catch(error => console.error('Error:', error));
+    }
   }
 
   render() {
+    
     const { handleCloseModal } = this.props;
 
     return (
@@ -39,16 +66,16 @@ class CreateNewAlbumModal extends React.Component {
           value={ this.state.newAlbumValue }
           onChange={ this.handleOnChange } />
         <div className="modal-btns">
-          <FontAwesomeIcon icon={ faTimesCircle } size="4x" color="#" className="default-btn" onClick={ handleCloseModal } />
-          <FontAwesomeIcon icon={ faCheckCircle } size="4x" color="#" className="primary-btn" />
-          {/* <Button
-            text="Cancel"
-            classOverride="btn default-btn"
-            handleClick={ handleCloseModal } />
-          <Button
-            text="Create"
-            classOverride="btn primary-btn"
-            styleOverride={ this.createBtnStyle } /> */}
+          <FontAwesomeIcon
+            icon={ faTimesCircle }
+            size="4x"
+            className="default-btn"
+            onClick={ handleCloseModal } />
+          <FontAwesomeIcon
+            icon={ faCheckCircle }
+            size="4x"
+            className="primary-btn"
+            onClick={ this.handleCreateAlbum } />
         </div>
       </div>
     );

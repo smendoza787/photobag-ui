@@ -1,4 +1,4 @@
-import { SET_ALBUMS } from '../constants/albumConstants';
+import { SET_ALBUMS, ADD_NEW_ALBUM } from '../constants/albumConstants';
 
 const setAlbums = albums => ({
   type: SET_ALBUMS,
@@ -10,3 +10,8 @@ export const fetchAlbums = () => dispatch => {
       .then(res => res.json())
       .then(data => dispatch(setAlbums(data)));
 };
+
+export const addNewAlbum = album => ({
+  type: ADD_NEW_ALBUM,
+  payload: album
+});

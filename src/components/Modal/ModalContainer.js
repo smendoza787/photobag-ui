@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import { createNewAlbumModalSelector } from '../../store/selectors/modalSelectors';
 import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from '../../store/actions/modalActions';
+import { addNewAlbum as _addNewAlbum } from '../../store/actions/albumActions';
 import CreateNewAlbumModal, { style as createNewAlbumStyle } from './CreateNewAlbumModal';
 
 ReactModal.setAppElement('#root');
@@ -26,7 +28,8 @@ class ModalContainer extends React.Component {
   render() {
     const {
       createNewAlbumModal,
-      toggleCreateNewAlbumModal
+      toggleCreateNewAlbumModal,
+      addNewAlbum
     } = this.props;
 
     return (
@@ -36,7 +39,10 @@ class ModalContainer extends React.Component {
           onRequestClose={ toggleCreateNewAlbumModal }
           style={ this.modalStyle }
         >
-          <CreateNewAlbumModal handleCloseModal={ toggleCreateNewAlbumModal } />
+          <CreateNewAlbumModal
+          handleCloseModal={ toggleCreateNewAlbumModal }
+          addNewAlbum={ addNewAlbum }
+          { ...this.props } />
         </ReactModal>
       </>
     );
@@ -48,7 +54,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal())
+  toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal()),
+  addNewAlbum: (album) => dispatch(_addNewAlbum(album))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ModalContainer));
