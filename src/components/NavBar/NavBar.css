@@ -3,7 +3,7 @@
   width: 20%;
   height: 100%;
   padding: 50px;
-  position: relative;
+  position: fixed;
 }
 
 .nav-header:hover {

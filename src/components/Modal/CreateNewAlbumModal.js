@@ -1,33 +1,12 @@
 import React from 'react';
 import { Button } from '../common';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookDead } from '@fortawesome/pro-light-svg-icons';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/pro-regular-svg-icons';
 
 import './Modal.css';
 
-export const style = {
-  overlay: {
-    backgroundColor: 'rgba(33, 33, 33, 0.75)'
-  },
-  content: {
-    borderRadius: '15px',
-    top: '25%',
-    left: '25%',
-    width: '50%',
-    height: '50%',
-    boxShadow: '0 2px 5px #696969'
-  }
-};
-
 class CreateNewAlbumModal extends React.Component {
-
-  createBtnStyle = {
-    backgroundColor: '#0bbc3a',
-    color: 'white',
-    width: '200px'
-  };
-
-  cancelBtnStyle = {
-    width: '200px'
-  };
 
   constructor(props) {
     super(props);
@@ -47,25 +26,29 @@ class CreateNewAlbumModal extends React.Component {
 
   }
 
-  handleCancelClick() {
-
-  }
-
   render() {
     const { handleCloseModal } = this.props;
 
     return (
       <div className="create-new-album-modal">
+        <FontAwesomeIcon icon={ faBookDead } size="6x" />
         <h1>Create New Album</h1>
-        <div className="create-new-album-content">
-          <div className="name-input">
-            <p>Name: </p>
-            <input type="text" value={ this.state.newAlbumValue } onChange={ this.handleOnChange } />
-          </div>
-          <div className="modal-btns">
-            <Button text="Create" styleOverride={ this.createBtnStyle } />
-            <Button text="Cancel" styleOverride={ this.cancelBtnStyle } handleClick={ handleCloseModal } />
-          </div>
+        <input
+          type="text"
+          placeholder="Album Title"
+          value={ this.state.newAlbumValue }
+          onChange={ this.handleOnChange } />
+        <div className="modal-btns">
+          <FontAwesomeIcon icon={ faTimesCircle } size="4x" color="#" className="default-btn" onClick={ handleCloseModal } />
+          <FontAwesomeIcon icon={ faCheckCircle } size="4x" color="#" className="primary-btn" />
+          {/* <Button
+            text="Cancel"
+            classOverride="btn default-btn"
+            handleClick={ handleCloseModal } />
+          <Button
+            text="Create"
+            classOverride="btn primary-btn"
+            styleOverride={ this.createBtnStyle } /> */}
         </div>
       </div>
     );
