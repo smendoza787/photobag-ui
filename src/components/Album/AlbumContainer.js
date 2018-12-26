@@ -85,7 +85,7 @@ class AlbumContainer extends React.Component {
   render() {    
     return (
       <>
-        <Album photos={ this.renderPhotos(this.state.photos) } handleUpload={ this.addImageToPhotos } { ...this.props } />
+        <Album photos={ this.renderPhotos(this.state.photos) } addImageToPhotos={ this.addImageToPhotos } { ...this.props } />
       </>
     );
   }

@@ -17,10 +17,6 @@ class Home extends React.Component {
     this.addImageToPhotos = this.addImageToPhotos.bind(this);
   }
 
-  componentDidMount() {
-    this.setPhotos();
-  }
-
   setPhotos() {
     const params = { Bucket };
     

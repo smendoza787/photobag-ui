@@ -44,7 +44,8 @@ class ImageUpload extends React.Component {
 
   uploadFile() {
     const { uploadFiles } = this.state;
-    const albumId = this.props.currAlbum.albumId;
+    const { currAlbum } = this.props;
+    const albumId = currAlbum.albumId;
     const uploadFileIsEmpty = uploadFiles.length === 0;
         
     if (!uploadFileIsEmpty) {
@@ -60,12 +61,28 @@ class ImageUpload extends React.Component {
   
       return s3.upload(params).promise()
         .then(s3Response => {
-          this.props.handleUpload(s3Response);
+          this.props.addImageToPhotos(s3Response);
 
-          this.setState({
-            isUploading: false,
-            uploadFiles: [],
-            filePreviews: ''
+          const data = {
+            albumId: albumId,
+            albumName: currAlbum.albumName,
+            photoKeys: [...currAlbum.photoKeys, s3Response.Key]
+          };
+
+          fetch(`https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums/${albumId}`, {
+            method: 'PUT',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(data => {
+
+            this.setState({
+              isUploading: false,
+              uploadFiles: [],
+              filePreviews: ''
+            });
+            
           });
         });
     }

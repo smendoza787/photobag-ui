@@ -1,6 +1,7 @@
 .image-wrapper {
   max-width: 250px;
   position: relative;
+  margin: 10px;
 }
 
 .image-wrapper img {

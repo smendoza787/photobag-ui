@@ -3,5 +3,6 @@
 }
 
 .album-photos {
-  
+  display: flex;
+  align-items: center;
 }

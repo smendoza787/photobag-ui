@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router';
 import { Button } from '../common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookDead } from '@fortawesome/pro-light-svg-icons';
@@ -27,7 +28,7 @@ class CreateNewAlbumModal extends React.Component {
     if (this.state.newAlbumValue.length > 0) {
       const data = {
         albumName: this.state.newAlbumValue,
-	      photoList: []
+	      photoKeys: []
       };
 
       fetch('https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums', {
