@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
 import Album from './Album';
-import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from '../../store/actions/modalActions';
+import { toggleUploadPhotoModal as _toggleUploadPhotoModal } from '../../store/actions/modalActions';
 import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albumSelectors';
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
 import Image from './Image';
@@ -99,11 +99,16 @@ class AlbumContainer extends React.Component {
     this.setState({ photoKeys: [...this.state.photoKeys, s3Key] });
   }
 
-  render() {    
+  render() {
+    const { photoKeys } = this.state;
+    const { currAlbum, toggleUploadPhotoModal } = this.props;
+
     return (
-      <>
-        <Album photos={ this.renderPhotos(this.state.photoKeys) } addImageToPhotos={ this.addImageToPhotos } { ...this.props } />
-      </>
+      <Album
+        photos={ this.renderPhotos(photoKeys) }
+        addImageToPhotos={ this.addImageToPhotos }
+        currAlbum={ currAlbum }
+        toggleUploadPhotoModal={ toggleUploadPhotoModal } />
     );
   }
 }
@@ -114,7 +119,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal())
+  toggleUploadPhotoModal: () => dispatch(_toggleUploadPhotoModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumContainer);
