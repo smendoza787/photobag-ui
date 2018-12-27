@@ -61,8 +61,6 @@ class ImageUpload extends React.Component {
   
       return s3.upload(params).promise()
         .then(s3Response => {
-          this.props.addImageToPhotos(s3Response);
-
           const data = {
             albumId: albumId,
             albumName: currAlbum.albumName,
@@ -76,13 +74,13 @@ class ImageUpload extends React.Component {
             },
             body: JSON.stringify(data)
           }).then(data => {
-
+            this.props.addImageToPhotos(s3Response.Key);
             this.setState({
               isUploading: false,
               uploadFiles: [],
               filePreviews: ''
             });
-            
+
           });
         });
     }

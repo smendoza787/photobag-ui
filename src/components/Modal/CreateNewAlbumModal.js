@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router';
-import { Button } from '../common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookDead } from '@fortawesome/pro-light-svg-icons';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/pro-regular-svg-icons';

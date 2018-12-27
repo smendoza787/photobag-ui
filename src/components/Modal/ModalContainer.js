@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import { createNewAlbumModalSelector } from '../../store/selectors/modalSelectors';
 import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from '../../store/actions/modalActions';
 import { addNewAlbum as _addNewAlbum } from '../../store/actions/albumActions';
-import CreateNewAlbumModal, { style as createNewAlbumStyle } from './CreateNewAlbumModal';
+import CreateNewAlbumModal from './CreateNewAlbumModal';
 
 ReactModal.setAppElement('#root');
 

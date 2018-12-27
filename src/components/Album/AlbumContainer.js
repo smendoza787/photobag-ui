@@ -13,7 +13,7 @@ class AlbumContainer extends React.Component {
     super(props);
 
     this.state = {
-      photos: [],
+      photoKeys: [],
       loadingAlbum: false
     }
 
@@ -27,7 +27,7 @@ class AlbumContainer extends React.Component {
   }
 
   setPhotos() {
-    this.setState({ photos: [], loadingAlbum: true });
+    this.setState({ photoKeys: [], loadingAlbum: true });
     const albumId = this.props.currAlbum.albumId;
 
     const params = {
@@ -39,53 +39,69 @@ class AlbumContainer extends React.Component {
       if (err) {
         console.log(err, err.stack);
       } else {
-        this.setState({ photos: data.Contents, loadingAlbum: false });
+        const photoKeys = data.Contents.map(content => content.Key);
+        this.setState({ photoKeys, loadingAlbum: false });
       }
     })
   }
 
-  deletePhoto(s3key) {
+  deletePhoto(keyToDelete) {
     const params = {
       Bucket: BUCKET_NAME,
-      Key: s3key
+      Key: keyToDelete
     };    
 
     s3bucket.deleteObject(params, (err, data) => {
       if (err) {
         console.log(err, err.stack);
       } else {
-        const newPhotos = this.state.photos.filter(photo => photo.Key !== s3key);
+        const { currAlbum } = this.props;
+        const newPhotos = this.state.photoKeys.filter(key => key !== keyToDelete);
 
-        this.setState({ photos: newPhotos });
+        const data = {
+          albumId: currAlbum.albumId,
+          albumName: currAlbum.albumName,
+          photoKeys: newPhotos
+        };
+
+        fetch(`https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums/${currAlbum.albumId}`, {
+            method: 'PUT',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(data => {
+            this.setState({ photoKeys: newPhotos });
+          });
       }
     });
   }
 
-  renderPhotos(bucketContents) {
-    
+  renderPhotos(bucketKeys) {
+
     if (this.state.loadingAlbum) {
       return <Spinner name='double-bounce' />;
     }
 
-    return bucketContents.map((content, i) => {
+    return bucketKeys.map((key, i) => {
       const url = s3bucket.getSignedUrl('getObject', {
         Bucket: BUCKET_NAME,
-        Key: content.Key,
+        Key: key,
         Expires: 60 * 5
       });
 
-      return <Image url={ url } handleDeletePhoto={ () => this.deletePhoto(content.Key) } key={ i } />;
+      return <Image url={ url } handleDeletePhoto={ () => this.deletePhoto(key) } key={ i } />;
     });
   }
 
-  addImageToPhotos(s3Response) {
-    this.setState({ photos: [...this.state.photos, s3Response] });
+  addImageToPhotos(s3Key) {
+    this.setState({ photoKeys: [...this.state.photoKeys, s3Key] });
   }
 
   render() {    
     return (
       <>
-        <Album photos={ this.renderPhotos(this.state.photos) } addImageToPhotos={ this.addImageToPhotos } { ...this.props } />
+        <Album photos={ this.renderPhotos(this.state.photoKeys) } addImageToPhotos={ this.addImageToPhotos } { ...this.props } />
       </>
     );
   }
