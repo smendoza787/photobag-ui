@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
 import Album from './Album';
+import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from '../../store/actions/modalActions';
 import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albumSelectors';
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
 import Image from './Image';
@@ -22,11 +23,11 @@ class AlbumContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.currAlbum !== this.props.currAlbum) {
-      this.setPhotos();
+      this.fetchPhotos();
     }
   }
 
-  setPhotos() {
+  fetchPhotos() {
     this.setState({ photoKeys: [], loadingAlbum: true });
     const albumId = this.props.currAlbum.albumId;
 
@@ -112,4 +113,8 @@ const mapStateToProps = (state, props) => ({
   currAlbum: currentAlbumSelector(props.match.params.albumId)(state)
 });
 
-export default connect(mapStateToProps)(AlbumContainer);
+const mapDispatchToProps = dispatch => ({
+  toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumContainer);
