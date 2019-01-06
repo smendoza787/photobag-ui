@@ -44,7 +44,7 @@ class ImageUpload extends React.Component {
 
   uploadFile() {
     const { uploadFiles } = this.state;
-    const { currAlbum } = this.props;
+    const { currAlbum, handleCloseModal } = this.props;
     const albumId = currAlbum.albumId;
     const uploadFileIsEmpty = uploadFiles.length === 0;
         
@@ -74,13 +74,14 @@ class ImageUpload extends React.Component {
             },
             body: JSON.stringify(data)
           }).then(data => {
-            this.props.addImageToPhotos(s3Response.Key);
+            // this.props.addImageToPhotos(s3Response.Key);
             this.setState({
               isUploading: false,
               uploadFiles: [],
               filePreviews: ''
             });
-
+            
+            handleCloseModal();
           });
         });
     }

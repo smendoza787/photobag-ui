@@ -1,8 +1,2 @@
-import { createSelector } from 'reselect';
-
-export const albumsSelector = state => state.photobook.albums;
-
-export const currentAlbumSelector = albumId => createSelector(
-  albumsSelector,
-  albums => albums.find(album => album.albumId === albumId)
-);
+export const albumsSelector = state => state.albums;
+export const currentAlbumSelector = state => state.currentAlbum;
