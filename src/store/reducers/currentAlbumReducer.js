@@ -1,4 +1,4 @@
-import { SET_CURRENT_ALBUM, SET_CURRENT_ALBUM_PHOTOS, ADD_PHOTO_TO_CURRENT_ALBUM } from '../constants/albumConstants';
+import { SET_CURRENT_ALBUM, SET_CURRENT_ALBUM_PHOTOS, ADD_PHOTO_TO_CURRENT_ALBUM, REMOVE_PHOTO_FROM_CURRENT_ALBUM } from '../constants/albumConstants';
 
 const initialState = {};
 
@@ -16,6 +16,14 @@ export default (state = initialState, action)  => {
         ...state,
         photoKeys: [...state.photoKeys, action.payload]
       };
+    case REMOVE_PHOTO_FROM_CURRENT_ALBUM: {
+      const newPhotos = state.photoKeys.filter(x => x !== action.payload);
+
+      return {
+        ...state,
+        photoKeys: newPhotos
+      };
+    }
     default:
       return state;
   }

@@ -5,7 +5,8 @@ import Spinner from 'react-spinkit';
 import Album from './Album';
 import {
   setCurrAlbum as _setCurrAlbum,
-  setCurrAlbumPhotos as _setCurrAlbumPhotos
+  setCurrAlbumPhotos as _setCurrAlbumPhotos,
+  removePhotoFromCurrAlbum as _removePhotoFromCurrAlbum
 } from '../../store/actions/albumActions';
 import { toggleUploadPhotoModal as _toggleUploadPhotoModal } from '../../store/actions/modalActions';
 import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albumSelectors';
@@ -71,12 +72,11 @@ class AlbumContainer extends React.Component {
         console.log(err, err.stack);
       } else {
         const { currAlbum } = this.props;
-        const newPhotos = this.state.photoKeys.filter(key => key !== keyToDelete);
 
         const data = {
           albumId: currAlbum.albumId,
           albumName: currAlbum.albumName,
-          photoKeys: newPhotos
+          photoKeys: currAlbum.photoKeys
         };
 
         fetch(`https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums/${currAlbum.albumId}`, {
@@ -86,7 +86,8 @@ class AlbumContainer extends React.Component {
             },
             body: JSON.stringify(data)
           }).then(data => {
-            this.setState({ photoKeys: newPhotos });
+            const { removePhotoFromCurrAlbum } = this.props;
+            removePhotoFromCurrAlbum(keyToDelete);
           });
       }
     });
@@ -138,9 +139,10 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  toggleUploadPhotoModal: () => dispatch(_toggleUploadPhotoModal()),
   setCurrAlbum: (album) => dispatch(_setCurrAlbum(album)),
   setCurrAlbumPhotos: (photos) => dispatch(_setCurrAlbumPhotos(photos)),
-  toggleUploadPhotoModal: () => dispatch(_toggleUploadPhotoModal())
+  removePhotoFromCurrAlbum: (photo) => dispatch(_removePhotoFromCurrAlbum(photo))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlbumContainer);

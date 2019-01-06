@@ -3,7 +3,8 @@ import {
   ADD_NEW_ALBUM,
   SET_CURRENT_ALBUM,
   SET_CURRENT_ALBUM_PHOTOS,
-  ADD_PHOTO_TO_CURRENT_ALBUM
+  ADD_PHOTO_TO_CURRENT_ALBUM,
+  REMOVE_PHOTO_FROM_CURRENT_ALBUM
 } from '../constants/albumConstants';
 
 // ==========================
@@ -42,5 +43,10 @@ export const setCurrAlbumPhotos = photos => ({
 
 export const addNewPhotoToAlbum = photo => ({
   type: ADD_PHOTO_TO_CURRENT_ALBUM,
+  payload: photo
+});
+
+export const removePhotoFromCurrAlbum = photo => ({
+  type: REMOVE_PHOTO_FROM_CURRENT_ALBUM,
   payload: photo
 });
