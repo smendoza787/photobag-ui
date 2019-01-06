@@ -119,10 +119,6 @@ class AlbumContainer extends React.Component {
     const { photoKeys } = this.state;
     const { currAlbum, toggleUploadPhotoModal } = this.props;    
 
-    console.log('this.props => ', this.props.currAlbum);
-
-
-
     return (
       <Album
         photos={ this.renderPhotos(currAlbum.photoKeys) }
