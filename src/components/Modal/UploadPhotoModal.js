@@ -3,11 +3,14 @@ import { ImageUpload } from '../ImageUpload';
 
 import './Modal.css';
 
-const UploadPhotoModal = ({ currAlbum, handleCloseModal }) => {  
+const UploadPhotoModal = ({ currAlbum, handleCloseModal, addNewPhotoToAlbum }) => {  
   return (
     <>
       <h1>Upload Photo</h1>
-      <ImageUpload currAlbum={ currAlbum } handleCloseModal={ handleCloseModal } />
+      <ImageUpload
+        currAlbum={ currAlbum }
+        handleCloseModal={ handleCloseModal }
+        addNewPhotoToAlbum={ addNewPhotoToAlbum } />
     </>
   )
 };

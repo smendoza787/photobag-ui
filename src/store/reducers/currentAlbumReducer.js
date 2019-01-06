@@ -1,4 +1,4 @@
-import { SET_CURRENT_ALBUM, SET_CURRENT_ALBUM_PHOTOS } from '../constants/albumConstants';
+import { SET_CURRENT_ALBUM, SET_CURRENT_ALBUM_PHOTOS, ADD_PHOTO_TO_CURRENT_ALBUM } from '../constants/albumConstants';
 
 const initialState = {};
 
@@ -10,6 +10,11 @@ export default (state = initialState, action)  => {
       return {
         ...state,
         photoKeys: action.payload
+      };
+    case ADD_PHOTO_TO_CURRENT_ALBUM:
+      return {
+        ...state,
+        photoKeys: [...state.photoKeys, action.payload]
       };
     default:
       return state;

@@ -2,7 +2,8 @@ import {
   SET_ALBUMS,
   ADD_NEW_ALBUM,
   SET_CURRENT_ALBUM,
-  SET_CURRENT_ALBUM_PHOTOS
+  SET_CURRENT_ALBUM_PHOTOS,
+  ADD_PHOTO_TO_CURRENT_ALBUM
 } from '../constants/albumConstants';
 
 // ==========================
@@ -37,4 +38,9 @@ export const setCurrAlbum = album => ({
 export const setCurrAlbumPhotos = photos => ({
   type: SET_CURRENT_ALBUM_PHOTOS,
   payload: photos
+});
+
+export const addNewPhotoToAlbum = photo => ({
+  type: ADD_PHOTO_TO_CURRENT_ALBUM,
+  payload: photo
 });

@@ -7,7 +7,10 @@ import {
   toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal,
   toggleUploadPhotoModal as _toggleUploadPhotoModal
 } from '../../store/actions/modalActions';
-import { addNewAlbum as _addNewAlbum } from '../../store/actions/albumActions';
+import {
+  addNewAlbum as _addNewAlbum,
+  addNewPhotoToAlbum as _addNewPhotoToAlbum
+} from '../../store/actions/albumActions';
 import CreateNewAlbumModal from './CreateNewAlbumModal';
 import UploadPhotoModal from './UploadPhotoModal';
 import { albumsSelector } from '../../store/selectors/albumSelectors';
@@ -46,6 +49,7 @@ class ModalContainer extends React.Component {
       uploadPhotoModal,
       toggleUploadPhotoModal,
       addNewAlbum,
+      addNewPhotoToAlbum,
       history
     } = this.props;    
 
@@ -67,7 +71,8 @@ class ModalContainer extends React.Component {
           style={ this.modalStyle }>
           <UploadPhotoModal
             currAlbum={ this.getCurrAlbum() }
-            handleCloseModal={ toggleUploadPhotoModal } />
+            handleCloseModal={ toggleUploadPhotoModal }
+            addNewPhotoToAlbum={ addNewPhotoToAlbum } />
         </ReactModal>
       </>
     );
@@ -82,8 +87,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal()),
+  toggleUploadPhotoModal: () => dispatch(_toggleUploadPhotoModal()),
   addNewAlbum: (album) => dispatch(_addNewAlbum(album)),
-  toggleUploadPhotoModal: () => dispatch(_toggleUploadPhotoModal())
+  addNewPhotoToAlbum: (photo) => dispatch(_addNewPhotoToAlbum(photo))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalContainer));
