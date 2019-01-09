@@ -5,13 +5,14 @@ import { pure } from 'recompose';
 
 import './NavBar.css';
 import Button from '../common/Button';
+import NavBarLink from './NavBarLink';
 
 const NavBar = ({ albums, toggleCreateNewAlbumModal }) => {
   return (
     <div className="navbar">
       <Header title={'Austin Mendoza'} />
       {albums.map((el, i) => {
-        return <Link to={`/album/${el.albumId}`} key={i}><h4>{el.albumName}</h4></Link>
+        return <Link to={`/album/${el.albumId}`} key={i}><NavBarLink text={ el.albumName } /></Link>
       })}
       <Button text="Create New Album" classOverride="btn-navbar" handleClick={ toggleCreateNewAlbumModal } />
     </div>

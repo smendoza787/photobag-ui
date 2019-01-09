@@ -13,7 +13,7 @@ import {
 } from '../../store/actions/albumActions';
 import CreateNewAlbumModal from './CreateNewAlbumModal';
 import UploadPhotoModal from './UploadPhotoModal';
-import { albumsSelector } from '../../store/selectors/albumSelectors';
+import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albumSelectors';
 
 ReactModal.setAppElement('#root');
 
@@ -33,17 +33,9 @@ class ModalContainer extends React.Component {
     }
   }
 
-  getCurrAlbum() {
-    const { albums } = this.props;
-    const windowPath = window.location.pathname;
-    const lastSlashIndex = windowPath.lastIndexOf('/') + 1;
-    const albumId = windowPath.substring(lastSlashIndex);
-
-    return albums.find(a => a.albumId === albumId);
-  }
-
   render() {
     const {
+      currAlbum,
       createNewAlbumModal,
       toggleCreateNewAlbumModal,
       uploadPhotoModal,
@@ -70,7 +62,7 @@ class ModalContainer extends React.Component {
           onRequestClose={ toggleUploadPhotoModal }
           style={ this.modalStyle }>
           <UploadPhotoModal
-            currAlbum={ this.getCurrAlbum() }
+            currAlbum={ currAlbum }
             handleCloseModal={ toggleUploadPhotoModal }
             addNewPhotoToAlbum={ addNewPhotoToAlbum } />
         </ReactModal>
@@ -82,7 +74,8 @@ class ModalContainer extends React.Component {
 const mapStateToProps = state => ({
   createNewAlbumModal: createNewAlbumModalSelector(state),
   uploadPhotoModal: uploadPhotoModalSelector(state),
-  albums: albumsSelector(state)
+  albums: albumsSelector(state),
+  currAlbum: currentAlbumSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -42,7 +42,7 @@ class ImageUpload extends React.Component {
     reader.readAsDataURL(accFiles[0]);
   }
 
-  uploadFile() {
+  uploadFile() {    
     const { uploadFiles } = this.state;
     const { currAlbum, handleCloseModal, addNewPhotoToAlbum } = this.props;
     const albumId = currAlbum.albumId;
@@ -73,7 +73,7 @@ class ImageUpload extends React.Component {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-          }).then(data => {
+          }).then(data => {            
             addNewPhotoToAlbum(s3Response.Key);
             this.setState({
               isUploading: false,

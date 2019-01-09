@@ -63,7 +63,8 @@ class CreateNewAlbumModal extends React.Component {
           type="text"
           placeholder="Album Title"
           value={ this.state.newAlbumValue }
-          onChange={ this.handleOnChange } />
+          onChange={ this.handleOnChange }
+          autoFocus />
         <div className="modal-btns">
           <FontAwesomeIcon
             icon={ faTimesCircle }
