@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { toggleCreateNewAlbumModal as _toggleCreateNewAlbumModal } from './store/actions/modalActions';
-import { fetchAlbums as _fetchAlbums } from './store/actions/albumActions';
+import {
+  fetchAlbums as _fetchAlbums,
+  removeAlbum as _removeAlbum
+} from './store/actions/albumActions';
 import { albumsSelector } from './store/selectors/albumSelectors';
 
 import { NavBar } from './components/NavBar';
@@ -54,6 +57,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAlbums: () => dispatch(_fetchAlbums()),
+  removeAlbum: (albumId) => dispatch(_removeAlbum(albumId)),
   toggleCreateNewAlbumModal: () => dispatch(_toggleCreateNewAlbumModal())
 });
 

@@ -4,7 +4,8 @@ import {
   SET_CURRENT_ALBUM,
   SET_CURRENT_ALBUM_PHOTOS,
   ADD_PHOTO_TO_CURRENT_ALBUM,
-  REMOVE_PHOTO_FROM_CURRENT_ALBUM
+  REMOVE_PHOTO_FROM_CURRENT_ALBUM,
+  REMOVE_ALBUM
 } from '../constants/albumConstants';
 
 // ==========================
@@ -25,6 +26,11 @@ export const fetchAlbums = () => dispatch => {
 export const addNewAlbum = album => ({
   type: ADD_NEW_ALBUM,
   payload: album
+});
+
+export const removeAlbum = albumId => ({
+  type: REMOVE_ALBUM,
+  payload: albumId
 });
 
 // ==========================
