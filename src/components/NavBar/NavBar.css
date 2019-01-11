@@ -10,6 +10,12 @@
   cursor: pointer;
 }
 
+.nav-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .btn-navbar {
   background-color: #b32e70;
   color: #ffffff;
