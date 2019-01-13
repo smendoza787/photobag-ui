@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 import Album from './Album';
 import {
@@ -13,15 +14,45 @@ import { albumsSelector, currentAlbumSelector } from '../../store/selectors/albu
 import s3bucket, { BUCKET_NAME } from '../../aws/s3bucket';
 import Image from './Image';
 
+const SortablePhoto = SortableElement(({ value }) => <li>{ value }</li>);
+
+const SortableAlbum = SortableContainer(({ items }) => {
+  return (
+    <ul>
+      {items.map((value, index) => {
+        bucketKeys.map((key, i) => {
+          const url = s3bucket.getSignedUrl('getObject', {
+            Bucket: BUCKET_NAME,
+            Key: key,
+            Expires: 60 * 5
+          });
+
+        return (
+          <SortablePhoto
+            key={ `item-${index}` }
+            index={ index }
+            value={ value } />
+        );
+      })}
+    </ul>
+  );
+});
+
 class AlbumContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loadingAlbum: false
+      loadingAlbum: false,
+      photos: []
     }
 
     this.addImageToPhotos = this.addImageToPhotos.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
+  }
+
+  onSortEnd({ oldIdx, newIdx }) {
+    this.setState({ items: arrayMove(this.state.photos, oldIdx, newIdx) });
   }
 
   componentWillMount() {
@@ -39,7 +70,10 @@ class AlbumContainer extends React.Component {
     
     fetch(`https://tfmybvjjik.execute-api.us-west-2.amazonaws.com/latest/albums/${match.params.albumId}`)
       .then(res => res.json())
-      .then(data => setCurrAlbum(data));
+      .then(data => {
+        setCurrAlbum(data);
+        this.setState({ photos: data.photoKeys });
+      });
   }
 
   fetchPhotos(albumId) {    
@@ -119,12 +153,16 @@ class AlbumContainer extends React.Component {
     const { photoKeys } = this.state;
     const { currAlbum, toggleUploadPhotoModal } = this.props;    
 
+    // return (
+    //   <Album
+    //     photos={ this.renderPhotos(currAlbum.photoKeys) }
+    //     addImageToPhotos={ this.addImageToPhotos }
+    //     currAlbum={ currAlbum }
+    //     toggleUploadPhotoModal={ toggleUploadPhotoModal } />
+    // );
+
     return (
-      <Album
-        photos={ this.renderPhotos(currAlbum.photoKeys) }
-        addImageToPhotos={ this.addImageToPhotos }
-        currAlbum={ currAlbum }
-        toggleUploadPhotoModal={ toggleUploadPhotoModal } />
+      <SortableAlbum items={ this.state.photos } onSortEnd={ this.onSortEnd } />
     );
   }
 }
